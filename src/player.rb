@@ -1,11 +1,10 @@
-class Player
-  def initialize
-    @image = Gosu::Image.new 'assets/spaceship.png'
-    @x = @y = 0.0
-  end
+require './src/moveable.rb'
+require './src/bullet.rb'
 
-  def warp(x, y)
-    @x, @y = x, y
+class Player < Moveable
+  def initialize
+    super
+    @image = Gosu::Image.new 'assets/spaceship.png'
   end
 
   def move_left
@@ -20,7 +19,9 @@ class Player
     end
   end
 
-  def draw
-    @image.draw(@x, @y, 1)
+  def fire
+    bullet = Bullet.new
+    bullet.warp @x + 20, @y - 10
+    return bullet
   end
 end

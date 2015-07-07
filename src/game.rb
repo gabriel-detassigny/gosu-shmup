@@ -8,15 +8,22 @@ class GameWindow < Gosu::Window
     @background = Gosu::Image.new 'assets/background.jpg', tileable: true
     @player = Player.new
     @player.warp(WIDTH / 2, HEIGHT - 100)
+    @bullets = []
   end
 
   def update
     _handle_inputs
+    @bullets.delete_if do |bullet|
+      bullet.move
+      bullet.over?
+    end
+    puts @bullets.size
   end
 
   def draw
     @background.draw 0, 0, 0
     @player.draw
+    @bullets.each { |bullet| bullet.draw }
   end
 
   def button_down key
@@ -31,6 +38,10 @@ class GameWindow < Gosu::Window
       @player.move_left
     elsif Gosu::button_down? Gosu::KbRight
       @player.move_right
+    end
+
+    if Gosu::button_down? Gosu::KbSpace
+      @bullets.push(@player.fire)
     end
   end
 end
