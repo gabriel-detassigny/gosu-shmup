@@ -17,7 +17,6 @@ class GameWindow < Gosu::Window
       bullet.move
       bullet.over?
     end
-    puts @bullets.size
   end
 
   def draw
