@@ -3,6 +3,7 @@ class Bullet < Moveable
     super
     @image = Gosu::Image.new 'assets/bullet.bmp'
     @time = Gosu::milliseconds / 100
+    @size = 9
   end
 
   def over?
