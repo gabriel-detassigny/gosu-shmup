@@ -21,11 +21,12 @@ class Moveable
     return [[@x, @y], [@x + @size, @y + @size]]
   end
 
-  def collision? other
+  def collision? other, recursion = true
     if (Gosu::distance(*self.position[0], *other.position[0]) <= other.size \
       && Gosu::distance(*self.position[0], *other.position[1]) <= other.size) \
       || (Gosu::distance(*self.position[1], *other.position[0]) <= other.size \
-      && Gosu::distance(*self.position[1], *other.position[1]) <= other.size)
+      && Gosu::distance(*self.position[1], *other.position[1]) <= other.size) \
+      || (recursion && other.collision?(self, false))
       return true
     end
     return false
