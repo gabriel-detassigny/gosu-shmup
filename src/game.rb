@@ -1,6 +1,7 @@
 require 'gosu'
 require './src/player.rb'
 require './src/enemy.rb'
+require './src/direction.rb'
 
 class GameWindow < Gosu::Window
   WIDTH = 800
@@ -57,9 +58,15 @@ class GameWindow < Gosu::Window
 
   def _handle_inputs
     if Gosu::button_down? Gosu::KbLeft
-      @player.move_left
+      @player.move Direction::LEFT
     elsif Gosu::button_down? Gosu::KbRight
-      @player.move_right
+      @player.move Direction::RIGHT
+    end
+
+    if Gosu::button_down? Gosu::KbDown
+      @player.move Direction::DOWN
+    elsif Gosu::button_down? Gosu::KbUp
+      @player.move Direction::UP
     end
 
     if Gosu::button_down? Gosu::KbSpace

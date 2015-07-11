@@ -1,3 +1,5 @@
+require './src/direction.rb'
+
 class Moveable
   attr_reader :size
 
@@ -15,6 +17,27 @@ class Moveable
 
   def draw
     @image.draw(@x, @y, 1)
+  end
+
+  def move direction
+    case direction
+    when Direction::LEFT
+      if @x > 0.0
+        @x -= @speed
+      end
+    when Direction::RIGHT
+      if @x < GameWindow::WIDTH - @size
+        @x += @speed
+      end
+    when Direction::UP
+      if @y > 0.0
+        @y -= @speed
+      end
+    when Direction::DOWN
+      if @y < GameWindow::HEIGHT - @size
+        @y += @speed
+      end
+    end
   end
 
   def position

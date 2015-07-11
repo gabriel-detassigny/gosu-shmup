@@ -9,19 +9,7 @@ class Player < Moveable
     @last_bullet = Gosu::milliseconds / 500
     @size = 48
   end
-
-  def move_left
-    if @x > 0.0
-      @x -= @speed
-    end
-  end
-
-  def move_right
-    if @x < GameWindow::WIDTH - @size
-      @x += @speed
-    end
-  end
-
+  
   def fire
     return nil if @last_bullet == Gosu::milliseconds / 500
 
