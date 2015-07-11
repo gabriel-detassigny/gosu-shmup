@@ -9,6 +9,7 @@ class Moveable
     @z = 1
     @image = nil
     @size = 0
+    @speed = 1
   end
 
   def warp(x, y)
