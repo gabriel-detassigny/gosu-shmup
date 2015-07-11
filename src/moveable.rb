@@ -1,4 +1,5 @@
 class Moveable
+  attr_reader :size
 
   def initialize
     @x = 0.0
@@ -21,10 +22,10 @@ class Moveable
   end
 
   def collision? other
-    if (self.position[0][0] >= other.position[0][0] && self.position[0][1] >= other.position[0][1] \
-      && self.position[0][0] <= other.position[1][0] && self.position[0][1] <= other.position[1][1]) \
-      || (self.position[1][0] >= other.position[0][0] && self.position[1][1] >= other.position[0][1] \
-      && self.position[1][0] <= other.position[1][0] && self.position[1][1] <= other.position[1][1])
+    if (Gosu::distance(*self.position[0], *other.position[0]) <= other.size \
+      && Gosu::distance(*self.position[0], *other.position[1]) <= other.size) \
+      || (Gosu::distance(*self.position[1], *other.position[0]) <= other.size \
+      && Gosu::distance(*self.position[1], *other.position[1]) <= other.size)
       return true
     end
     return false
