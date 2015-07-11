@@ -1,3 +1,7 @@
+require 'gosu'
+require './src/player.rb'
+require './src/enemy.rb'
+
 class GameWindow < Gosu::Window
   WIDTH = 800
   HEIGHT = 600
