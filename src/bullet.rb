@@ -7,7 +7,7 @@ class Bullet < Moveable
   end
 
   def over?
-    @y <= 0.0
+    @y <= 0.0 || @y >= GameWindow::HEIGHT
   end
 
 end
