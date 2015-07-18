@@ -24,7 +24,7 @@ class GameWindow < Gosu::Window
     _handle_inputs
     _check_collisions
     @bullets.delete_if do |bullet|
-      bullet.move
+      bullet.travel
       bullet.over?
     end
   end

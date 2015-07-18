@@ -1,6 +1,7 @@
 require './src/direction.rb'
 
 class Moveable
+  attr_accessor :orientation
   attr_reader :size
 
   def initialize
@@ -10,6 +11,7 @@ class Moveable
     @image = nil
     @size = 0
     @speed = 1
+    @orientation = Direction::DOWN
   end
 
   def warp(x, y)
@@ -18,6 +20,17 @@ class Moveable
 
   def draw
     @image.draw(@x, @y, @z)
+  end
+
+  def travel
+    if @time < Gosu::milliseconds / 100
+      if @orientation == Direction::UP
+        @y -= 10
+      elsif @orientation == Direction::DOWN
+        @y += 10
+      end
+      @time = Gosu::milliseconds / 100
+    end
   end
 
   def move direction

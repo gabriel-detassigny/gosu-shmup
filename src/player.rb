@@ -1,5 +1,6 @@
 require './src/moveable.rb'
 require './src/bullet.rb'
+require './src/direction.rb'
 
 class Player < Moveable
   def initialize
@@ -9,12 +10,13 @@ class Player < Moveable
     @last_bullet = Gosu::milliseconds / 500
     @size = 48
   end
-  
+
   def fire
     return nil if @last_bullet == Gosu::milliseconds / 500
 
     bullet = Bullet.new
     bullet.warp @x + 20, @y - 10
+    bullet.orientation = Direction::UP
     @last_bullet = Gosu::milliseconds / 500
     return bullet
   end
