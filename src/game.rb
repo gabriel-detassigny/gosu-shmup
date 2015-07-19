@@ -36,12 +36,6 @@ class GameWindow < Gosu::Window
     @bullets.each { |bullet| bullet.draw }
   end
 
-  def button_down key
-    if key == Gosu::KbEscape
-      close
-    end
-  end
-
   private
   def _check_collisions
     @bullets.delete_if do |bullet|
@@ -57,6 +51,10 @@ class GameWindow < Gosu::Window
   end
 
   def _handle_inputs
+    if Gosu::button_down? Gosu::KbEscape
+      close
+    end
+    
     if Gosu::button_down? Gosu::KbLeft
       @player.move Direction::LEFT
     elsif Gosu::button_down? Gosu::KbRight
