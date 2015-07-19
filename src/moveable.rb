@@ -12,6 +12,7 @@ class Moveable
     @size = 0
     @speed = 1
     @orientation = Direction::DOWN
+    @time = Gosu::milliseconds / 100
   end
 
   def warp(x, y)

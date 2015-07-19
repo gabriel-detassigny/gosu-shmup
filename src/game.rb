@@ -1,6 +1,6 @@
 require 'gosu'
 require './src/player.rb'
-require './src/enemy.rb'
+require './src/enemyfleet.rb'
 require './src/direction.rb'
 
 class GameWindow < Gosu::Window
@@ -14,14 +14,12 @@ class GameWindow < Gosu::Window
     @player = Player.new
     @player.warp(WIDTH / 2, HEIGHT - 100)
     @bullets = []
-    @enemies = []
-    enemy = Enemy.new
-    enemy.warp(WIDTH / 2, 100)
-    @enemies.push enemy
+    @fleet = EnemyFleet.new
   end
 
   def update
     _handle_inputs
+    @fleet.update
     _check_collisions
     @bullets.delete_if do |bullet|
       bullet.travel
@@ -32,21 +30,14 @@ class GameWindow < Gosu::Window
   def draw
     @background.draw 0, 0, 0
     @player.draw
-    @enemies.each { |enemy| enemy.draw }
+    @fleet.draw
     @bullets.each { |bullet| bullet.draw }
   end
 
   private
   def _check_collisions
     @bullets.delete_if do |bullet|
-      collision = false
-      @enemies.delete_if do |enemy|
-        if bullet.collision? enemy
-          collision = true
-          true
-        end
-      end
-      collision
+      @fleet.collision? bullet
     end
   end
 
@@ -54,7 +45,7 @@ class GameWindow < Gosu::Window
     if Gosu::button_down? Gosu::KbEscape
       close
     end
-    
+
     if Gosu::button_down? Gosu::KbLeft
       @player.move Direction::LEFT
     elsif Gosu::button_down? Gosu::KbRight
