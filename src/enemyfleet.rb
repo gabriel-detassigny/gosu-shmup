@@ -7,22 +7,16 @@ class EnemyFleet
   end
 
   def draw
-    @enemies.each { |enemy| enemy.draw }
+    @enemies.each(&:draw)
   end
 
   def update
-    @enemies.each { |enemy| enemy.travel }
+    @enemies.each(&:travel)
   end
 
   def collision? moveable
-    collision = false
-    @enemies.delete_if do |enemy|
-      if moveable.collision? enemy
-        collision = true
-        true
-      end
-    end
-    collision
+    clear = @enemies.reject! {|enemy| moveable.collision? enemy }
+    clear != nil
   end
 
   private

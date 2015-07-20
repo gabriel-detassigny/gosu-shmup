@@ -36,7 +36,7 @@ class GameWindow < Gosu::Window
 
   private
   def _check_collisions
-    @bullets.delete_if do |bullet|
+    @bullets.reject! do |bullet|
       @fleet.collision? bullet
     end
   end
