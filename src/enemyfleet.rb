@@ -3,7 +3,7 @@ require './src/enemy.rb'
 class EnemyFleet
   def initialize
     @enemies = []
-    _add_enemy
+    @time = Gosu::milliseconds / 500
   end
 
   def draw
@@ -11,6 +11,7 @@ class EnemyFleet
   end
 
   def update
+    _random_ai
     @enemies.each(&:travel)
   end
 
@@ -22,7 +23,17 @@ class EnemyFleet
   private
   def _add_enemy
     enemy = Enemy.new
-    enemy.warp(GameWindow::WIDTH / 2, 100)
+    width = rand(0..(GameWindow::WIDTH - enemy.size))
+    enemy.warp(width, 0.0)
     @enemies.push enemy
+  end
+
+  def _random_ai
+    if @time != Gosu::milliseconds / 500
+      if rand(1..5) == 1
+        _add_enemy
+      end
+      @time = Gosu::milliseconds / 500
+    end
   end
 end
