@@ -3,6 +3,7 @@ class Bullet < Moveable
     super
     @image = Gosu::Image.new 'assets/bullet.bmp'
     @size = 9
+    @speed = 8
   end
 
   def over?

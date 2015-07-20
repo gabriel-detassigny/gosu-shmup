@@ -24,13 +24,13 @@ class Moveable
   end
 
   def travel
-    if @time < Gosu::milliseconds / 100
+    if @time < Gosu::milliseconds / 40
       if @orientation == Direction::UP
-        @y -= 10
+        @y -= @speed
       elsif @orientation == Direction::DOWN
-        @y += 10
+        @y += @speed
       end
-      @time = Gosu::milliseconds / 100
+      @time = Gosu::milliseconds / 40
     end
   end
 

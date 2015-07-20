@@ -5,6 +5,7 @@ class Enemy < Moveable
     super
     @image = Gosu::Image.new 'assets/enemy.gif'
     @size = 32
+    @speed = 3
   end
 
 end
