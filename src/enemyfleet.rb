@@ -13,6 +13,7 @@ class EnemyFleet
   def update
     _random_ai
     @enemies.each(&:travel)
+    @enemies.reject!(&:over?)
   end
 
   def collision? moveable

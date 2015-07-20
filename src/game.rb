@@ -21,7 +21,7 @@ class GameWindow < Gosu::Window
     _handle_inputs
     @fleet.update
     _check_collisions
-    @bullets.delete_if do |bullet|
+    @bullets.reject! do |bullet|
       bullet.travel
       bullet.over?
     end
@@ -31,7 +31,7 @@ class GameWindow < Gosu::Window
     @background.draw 0, 0, 0
     @player.draw
     @fleet.draw
-    @bullets.each { |bullet| bullet.draw }
+    @bullets.each(&:draw)
   end
 
   private

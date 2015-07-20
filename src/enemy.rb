@@ -8,4 +8,7 @@ class Enemy < Moveable
     @speed = 3
   end
 
+  def over?
+    @y >= GameWindow::HEIGHT
+  end
 end
