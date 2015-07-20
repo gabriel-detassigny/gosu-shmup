@@ -10,7 +10,7 @@ class GameWindow < Gosu::Window
   def initialize
     super WIDTH, HEIGHT
     self.caption = 'Shmup Game'
-    @background = Gosu::Image.new 'assets/background.jpg', tileable: true
+    @background = Gosu::Image.new 'assets/background.png', tileable: true
     @player = Player.new
     @player.warp(WIDTH / 2, HEIGHT - 100)
     @bullets = []
