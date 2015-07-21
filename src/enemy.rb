@@ -11,4 +11,11 @@ class Enemy < Moveable
   def over?
     @y >= GameWindow::HEIGHT
   end
+
+  def fire
+    bullet = Bullet.new
+    bullet.warp @x + 15, @y + 35
+    bullet.orientation = Direction::DOWN
+    bullet
+  end
 end

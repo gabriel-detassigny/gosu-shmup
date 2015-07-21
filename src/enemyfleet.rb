@@ -4,6 +4,7 @@ class EnemyFleet
   def initialize
     @enemies = []
     @time = Gosu::milliseconds / 500
+    @bullets = []
   end
 
   def draw
@@ -14,6 +15,10 @@ class EnemyFleet
     _random_ai
     @enemies.each(&:travel)
     @enemies.reject!(&:over?)
+  end
+
+  def get_bullets
+    @bullets.pop(@bullets.count)
   end
 
   def collision? moveable
@@ -35,6 +40,12 @@ class EnemyFleet
         _add_enemy
       end
       @time = Gosu::milliseconds / 500
+      @enemies.each do |enemy|
+        if rand(1..4) == 1
+          @bullets.push enemy.fire
+        end
+      end
     end
   end
+
 end

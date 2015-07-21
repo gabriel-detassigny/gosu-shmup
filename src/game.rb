@@ -20,6 +20,7 @@ class GameWindow < Gosu::Window
   def update
     _handle_inputs
     @fleet.update
+    @bullets.concat @fleet.get_bullets
     _check_collisions
     @bullets.reject! do |bullet|
       bullet.travel
