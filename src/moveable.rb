@@ -7,7 +7,7 @@ class Moveable
   def initialize
     @x = 0.0
     @y = 0.0
-    @z = 1
+    @z = 2
     @image = nil
     @size = 0
     @speed = 1
