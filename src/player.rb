@@ -3,7 +3,7 @@ require './src/bullet.rb'
 require './src/direction.rb'
 
 class Player < Moveable
-  attr_accessor :lives
+  attr_accessor :lives, :score
   def initialize
     super
     @image = Gosu::Image.new 'assets/spaceship.png'
@@ -12,11 +12,14 @@ class Player < Moveable
     @size = 48
     @lives = 3
     @heart = Gosu::Image.new 'assets/heart.png'
+    @score = 0
+    @font = Gosu::Font.new 20
   end
 
   def draw
     super
     _draw_lives
+    _draw_score
   end
 
   def fire
@@ -37,5 +40,10 @@ class Player < Moveable
       @heart.draw(x, y, 1)
       x += 40
     end
+  end
+
+  def _draw_score
+    score_size = @score.to_s.size + 1
+    @font.draw("#{@score}", GameWindow::WIDTH - (10 * score_size), GameWindow::HEIGHT - 25, 1)
   end
 end
