@@ -19,21 +19,30 @@ class GameWindow < Gosu::Window
 
   def update
     _handle_inputs
-    @player.update
-    @fleet.update
-    @bullets.concat @fleet.get_bullets
-    _check_collisions
-    @bullets.reject! do |bullet|
-      bullet.travel
-      bullet.over?
+    if @player.lives > 0
+      @player.update
+      @fleet.update
+      @bullets.concat @fleet.get_bullets
+      _check_collisions
+      @bullets.reject! do |bullet|
+        bullet.travel
+        bullet.over?
+      end
     end
   end
 
   def draw
     @background.draw 0, 0, 0
-    @player.draw
-    @fleet.draw
-    @bullets.each(&:draw)
+    if @player.lives > 0
+      @player.draw
+      @fleet.draw
+      @bullets.each(&:draw)
+    else
+      font = Gosu::Font.new 40
+      title_font = Gosu::Font.new 80
+      title_font.draw("GAME OVER", WIDTH / 4, HEIGHT / 4, 1)
+      font.draw("Score : #{@player.score}", 320, HEIGHT / 2, 1)
+    end
   end
 
   private
@@ -44,9 +53,6 @@ class GameWindow < Gosu::Window
         true
       elsif (!bullet.fired_by_player? && @player.collision?(bullet))
         @player.remove_life
-        if @player.lives == 0
-          close
-        end
         true
       end
     end
