@@ -56,6 +56,9 @@ class GameWindow < Gosu::Window
         true
       end
     end
+    if @fleet.collision?(@player)
+      @player.remove_life
+    end
   end
 
   def _handle_inputs
