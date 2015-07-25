@@ -3,7 +3,9 @@ require './src/bullet.rb'
 require './src/direction.rb'
 
 class Player < Moveable
-  attr_accessor :lives, :score
+  attr_accessor :score
+  attr_reader :lives
+
   def initialize
     super
     @image = Gosu::Image.new 'assets/spaceship.png'
@@ -14,12 +16,26 @@ class Player < Moveable
     @heart = Gosu::Image.new 'assets/heart.png'
     @score = 0
     @font = Gosu::Font.new 20
+    @animation = 0
   end
 
   def draw
-    super
+    if @animation % 2 == 0
+      super
+    end
     _draw_lives
     _draw_score
+  end
+
+  def update
+    @animation -= 1 if @animation > 0
+  end
+
+  def remove_life
+    if @animation == 0
+      @lives -= 1
+      @animation = 100
+    end
   end
 
   def fire

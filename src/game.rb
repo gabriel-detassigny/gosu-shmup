@@ -19,6 +19,7 @@ class GameWindow < Gosu::Window
 
   def update
     _handle_inputs
+    @player.update
     @fleet.update
     @bullets.concat @fleet.get_bullets
     _check_collisions
@@ -42,7 +43,7 @@ class GameWindow < Gosu::Window
         @player.score += 5 if bullet.fired_by_player?
         true
       elsif (!bullet.fired_by_player? && @player.collision?(bullet))
-        @player.lives -= 1
+        @player.remove_life
         if @player.lives == 0
           close
         end
