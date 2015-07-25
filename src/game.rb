@@ -8,7 +8,7 @@ class GameWindow < Gosu::Window
   HEIGHT = 600
 
   def initialize
-    super WIDTH, HEIGHT
+    super WIDTH, HEIGHT, fullscreen: true
     self.caption = 'Shmup Game'
     @background = Gosu::Image.new 'assets/background.png', tileable: true
     @player = Player.new
