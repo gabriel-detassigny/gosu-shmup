@@ -1,4 +1,4 @@
-require './src/enemy.rb'
+require './src/enemy'
 
 class EnemyFleet
   def initialize

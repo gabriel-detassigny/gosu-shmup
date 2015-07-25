@@ -1,7 +1,7 @@
 require 'gosu'
-require './src/player.rb'
-require './src/enemyfleet.rb'
-require './src/direction.rb'
+require './src/player'
+require './src/enemyfleet'
+require './src/direction'
 
 class GameWindow < Gosu::Window
   WIDTH = 800

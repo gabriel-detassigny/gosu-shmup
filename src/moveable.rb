@@ -1,4 +1,4 @@
-require './src/direction.rb'
+require './src/direction'
 
 class Moveable
   attr_accessor :orientation

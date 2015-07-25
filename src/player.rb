@@ -1,6 +1,6 @@
-require './src/moveable.rb'
-require './src/bullet.rb'
-require './src/direction.rb'
+require './src/moveable'
+require './src/bullet'
+require './src/direction'
 
 class Player < Moveable
   attr_accessor :score

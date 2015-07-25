@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require './src/game.rb'
+require './src/game'
 
 window = GameWindow.new
 window.show

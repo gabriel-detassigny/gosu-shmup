@@ -1,4 +1,4 @@
-require './src/moveable.rb'
+require './src/moveable'
 
 class Enemy < Moveable
   def initialize
