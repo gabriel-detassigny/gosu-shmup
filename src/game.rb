@@ -7,8 +7,9 @@ class GameWindow < Gosu::Window
   WIDTH = 800
   HEIGHT = 600
 
-  def initialize
-    super WIDTH, HEIGHT, fullscreen: true
+  def initialize options = {}
+    puts options.to_s
+    super WIDTH, HEIGHT, options['fullscreen']
     self.caption = 'Shmup Game'
     @background = Gosu::Image.new 'assets/background.png', tileable: true
     @player = Player.new
