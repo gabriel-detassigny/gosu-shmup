@@ -53,13 +53,13 @@ class Player < Moveable
     x = 2.0
     y = GameWindow::HEIGHT - 32
     (1..@lives).each do |life|
-      @heart.draw(x, y, 1)
+      @heart.draw(x, y, ZOrder::INFO)
       x += 40
     end
   end
 
   def _draw_score
     score_size = @score.to_s.size + 1
-    @font.draw("#{@score}", GameWindow::WIDTH - (10 * score_size), GameWindow::HEIGHT - 25, 1)
+    @font.draw("#{@score}", GameWindow::WIDTH - (10 * score_size), GameWindow::HEIGHT - 25, ZOrder::INFO)
   end
 end

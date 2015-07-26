@@ -5,6 +5,7 @@ class Bullet < Moveable
     @size = 9
     @speed = 8
     @player_fired = player_fired
+    @z = ZOrder::BULLET
   end
 
   def fired_by_player?

@@ -2,6 +2,7 @@ require 'gosu'
 require './src/player'
 require './src/enemyfleet'
 require './src/direction'
+require './src/zorder'
 
 class GameWindow < Gosu::Window
   WIDTH = 800
@@ -32,7 +33,7 @@ class GameWindow < Gosu::Window
   end
 
   def draw
-    @background.draw 0, 0, 0
+    @background.draw 0, 0, ZOrder::BACKGROUND
     if @player.lives > 0
       @player.draw
       @fleet.draw
@@ -40,8 +41,8 @@ class GameWindow < Gosu::Window
     else
       font = Gosu::Font.new 40
       title_font = Gosu::Font.new 80
-      title_font.draw("GAME OVER", WIDTH / 4, HEIGHT / 4, 1)
-      font.draw("Score : #{@player.score}", 320, HEIGHT / 2, 1)
+      title_font.draw("GAME OVER", WIDTH / 4, HEIGHT / 4, ZOrder::INFO)
+      font.draw("Score : #{@player.score}", 320, HEIGHT / 2, ZOrder::INFO)
     end
   end
 

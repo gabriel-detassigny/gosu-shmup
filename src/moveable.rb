@@ -1,4 +1,5 @@
 require './src/direction'
+require './src/zorder'
 
 class Moveable
   attr_accessor :orientation
@@ -7,7 +8,7 @@ class Moveable
   def initialize
     @x = 0.0
     @y = 0.0
-    @z = 2
+    @z = ZOrder::SHIP
     @image = nil
     @size = 0
     @speed = 1
