@@ -27,7 +27,6 @@ class Enemy < Moveable
     elsif @destination - @speed > @x
       move Direction::RIGHT
     end
-    random_destination if rand(0..15) == 0
   end
 
   def random_destination

@@ -44,6 +44,9 @@ class EnemyFleet
         if rand(1..4) == 1
           @bullets.push enemy.fire
         end
+        if rand(0..2) == 1
+          enemy.random_destination
+        end
       end
     end
   end
