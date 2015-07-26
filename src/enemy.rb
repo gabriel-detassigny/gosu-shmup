@@ -6,6 +6,7 @@ class Enemy < Moveable
     @image = Gosu::Image.new 'assets/enemy.gif'
     @size = 32
     @speed = 3
+    random_destination
   end
 
   def over?
@@ -17,5 +18,19 @@ class Enemy < Moveable
     bullet.warp @x + 15, @y + 35
     bullet.orientation = Direction::DOWN
     bullet
+  end
+
+  def travel
+    super
+    if @destination + @speed < @x
+      move Direction::LEFT
+    elsif @destination - @speed > @x
+      move Direction::RIGHT
+    end
+    random_destination if rand(0..15) == 0
+  end
+
+  def random_destination
+    @destination = rand(0..(GameWindow::WIDTH - @size))
   end
 end
