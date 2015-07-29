@@ -1,6 +1,6 @@
 require 'gosu'
-require './src/player'
-require './src/enemyfleet'
+require './src/elements/player'
+require './src/elements/enemyfleet'
 require './src/direction'
 require './src/zorder'
 

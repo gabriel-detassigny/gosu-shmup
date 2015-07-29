@@ -1,5 +1,5 @@
-require './src/moveable'
-require './src/bullet'
+require './src/elements/moveable'
+require './src/elements/bullet'
 require './src/direction'
 
 class Player < Moveable

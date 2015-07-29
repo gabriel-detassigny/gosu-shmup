@@ -1,4 +1,4 @@
-require './src/moveable'
+require './src/elements/moveable'
 
 class Enemy < Moveable
   def initialize

@@ -1,4 +1,4 @@
-require './src/enemy'
+require './src/elements/enemy'
 
 class EnemyFleet
   def initialize
