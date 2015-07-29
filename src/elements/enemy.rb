@@ -7,6 +7,7 @@ class Enemy < Moveable
     @size = 32
     @speed = 3
     random_destination
+    @z = ZOrder::SHIP
   end
 
   def over?

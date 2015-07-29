@@ -17,6 +17,7 @@ class Player < Moveable
     @score = 0
     @font = Gosu::Font.new 20
     @animation = 0
+    @z = ZOrder::SHIP
   end
 
   def draw

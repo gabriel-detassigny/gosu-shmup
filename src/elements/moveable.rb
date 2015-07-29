@@ -1,27 +1,15 @@
 require './src/direction'
 require './src/zorder'
+require './src/elements/element'
 
-class Moveable
+class Moveable < Element
   attr_accessor :orientation
   attr_reader :size
 
   def initialize
-    @x = 0.0
-    @y = 0.0
-    @z = ZOrder::SHIP
-    @image = nil
-    @size = 0
     @speed = 1
     @orientation = Direction::DOWN
     @time = Gosu::milliseconds / 100
-  end
-
-  def warp(x, y)
-    @x, @y = x, y
-  end
-
-  def draw
-    @image.draw(@x, @y, @z)
   end
 
   def travel
@@ -55,20 +43,4 @@ class Moveable
       end
     end
   end
-
-  def position
-    return [[@x, @y], [@x + @size, @y + @size]]
-  end
-
-  def collision? other, recursion = true
-    if (Gosu::distance(*self.position[0], *other.position[0]) <= other.size \
-      && Gosu::distance(*self.position[0], *other.position[1]) <= other.size) \
-      || (Gosu::distance(*self.position[1], *other.position[0]) <= other.size \
-      && Gosu::distance(*self.position[1], *other.position[1]) <= other.size) \
-      || (recursion && other.collision?(self, false))
-      return true
-    end
-    return false
-  end
-
 end
