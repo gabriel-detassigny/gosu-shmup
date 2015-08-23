@@ -1,9 +1,12 @@
 class Element
+  attr_reader :size
+
   def initialize
     @x = 0.0
     @y = 0.0
     @size = 0
     @image = nil
+    @time = Gosu::milliseconds / 40
   end
 
   def warp(x, y)
@@ -12,6 +15,13 @@ class Element
 
   def draw
     @image.draw(@x, @y, @z)
+  end
+
+  def travel
+    if @time < Gosu::milliseconds / 40
+        @y += 3
+      @time = Gosu::milliseconds / 40
+    end
   end
 
   def position

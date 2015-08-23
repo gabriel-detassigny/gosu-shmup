@@ -1,6 +1,7 @@
 require 'gosu'
 require './src/elements/player'
 require './src/elements/enemyfleet'
+require './src/elements/item'
 require './src/direction'
 require './src/zorder'
 
@@ -16,6 +17,7 @@ class GameWindow < Gosu::Window
     @player.warp(WIDTH / 2, HEIGHT - 100)
     @bullets = []
     @fleet = EnemyFleet.new
+    @items = []
   end
 
   def update
@@ -29,6 +31,8 @@ class GameWindow < Gosu::Window
         bullet.travel
         bullet.over?
       end
+      @items.each(&:travel)
+      @items.reject!(&:over?)
     end
   end
 
@@ -38,6 +42,7 @@ class GameWindow < Gosu::Window
       @player.draw
       @fleet.draw
       @bullets.each(&:draw)
+      @items.each(&:draw)
     else
       font = Gosu::Font.new 40
       title_font = Gosu::Font.new 80
@@ -51,6 +56,10 @@ class GameWindow < Gosu::Window
     @bullets.reject! do |bullet|
       if bullet.fired_by_player? && @fleet.collision?(bullet)
         @player.score += 5
+        if rand(0..10) == 0
+          item = Item.new bullet.position[0]
+          @items.push item
+        end
         true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
         @player.remove_life
@@ -59,6 +68,12 @@ class GameWindow < Gosu::Window
     end
     if @fleet.collision?(@player)
       @player.remove_life
+    end
+    @items.reject! do |item|
+      if item.collision? @player
+        @player.get_item item
+        true
+      end
     end
   end
 

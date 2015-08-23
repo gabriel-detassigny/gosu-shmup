@@ -6,6 +6,8 @@ class Player < Moveable
   attr_accessor :score
   attr_reader :lives
 
+  MAX_LIVES = 5
+
   def initialize
     super
     @image = Gosu::Image.new 'assets/spaceship.png'
@@ -47,6 +49,12 @@ class Player < Moveable
     bullet.orientation = Direction::UP
     @last_bullet = Gosu::milliseconds / 350
     return bullet
+  end
+
+  def get_item item
+    if item.type == 'life'
+      @lives += 1 if @lives < MAX_LIVES
+    end
   end
 
   private

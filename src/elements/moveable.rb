@@ -4,12 +4,11 @@ require './src/elements/element'
 
 class Moveable < Element
   attr_accessor :orientation
-  attr_reader :size
 
   def initialize
+    super
     @speed = 1
     @orientation = Direction::DOWN
-    @time = Gosu::milliseconds / 100
   end
 
   def travel

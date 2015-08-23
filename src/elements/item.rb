@@ -1,9 +1,19 @@
 require './src/elements/element'
 
-class Element
-  def initialize player
-    @image = Gosu::Image.new 'assets/life-item.png'
-    @size = 16
+class Item < Element
+  attr_reader :type
+  def initialize position
+    super()
+    @x = position[0]
+    @y = position[1]
     @z = ZOrder::ITEM
+    @size = 16
+
+    @type = %w(life).sample
+    @image = Gosu::Image.new "assets/#{@type}-item.png"
+  end
+
+  def over?
+    @y >= GameWindow::HEIGHT
   end
 end
