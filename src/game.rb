@@ -50,7 +50,7 @@ class GameWindow < Gosu::Window
   def _check_collisions
     @bullets.reject! do |bullet|
       if bullet.fired_by_player? && @fleet.collision?(bullet)
-        @player.score += 5 if bullet.fired_by_player?
+        @player.score += 5
         true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
         @player.remove_life
