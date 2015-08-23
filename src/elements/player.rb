@@ -40,12 +40,12 @@ class Player < Moveable
   end
 
   def fire
-    return nil if @last_bullet == Gosu::milliseconds / 500
+    return nil if @last_bullet == Gosu::milliseconds / 350
 
     bullet = Bullet.new(true)
     bullet.warp @x + 20, @y - 10
     bullet.orientation = Direction::UP
-    @last_bullet = Gosu::milliseconds / 500
+    @last_bullet = Gosu::milliseconds / 350
     return bullet
   end
 
