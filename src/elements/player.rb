@@ -20,6 +20,7 @@ class Player < Moveable
     @font = Gosu::Font.new 20
     @animation = 0
     @z = ZOrder::SHIP
+    @canons = 1
   end
 
   def draw
@@ -43,21 +44,41 @@ class Player < Moveable
 
   def fire
     return nil if @last_bullet == Gosu::milliseconds / 350
-
+    bullets = _extra_canons
     bullet = Bullet.new(true)
     bullet.warp @x + 20, @y - 10
     bullet.orientation = Direction::UP
     @last_bullet = Gosu::milliseconds / 350
-    return bullet
+    bullets.push bullet
+    return bullets
   end
 
   def get_item item
     if item.type == 'life'
       @lives += 1 if @lives < MAX_LIVES
+    elsif item.type == 'missile'
+      @canons += 1
     end
   end
 
   private
+  def _extra_canons
+    bullets = []
+    if @canons > 1
+      bullet = Bullet.new(true)
+      bullet.warp @x, @y - 10
+      bullet.orientation = Direction::UP
+      bullets.push bullet
+    end
+    if @canons > 2
+      bullet = Bullet.new(true)
+      bullet.warp @x + 40, @y - 10
+      bullet.orientation = Direction::UP
+      bullets.push bullet
+    end
+    return bullets
+  end
+
   def _draw_lives
     x = 2.0
     y = GameWindow::HEIGHT - 32

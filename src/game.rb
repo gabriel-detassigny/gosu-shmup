@@ -95,8 +95,8 @@ class GameWindow < Gosu::Window
     end
 
     if Gosu::button_down? Gosu::KbSpace
-      bullet = @player.fire
-      @bullets.push(bullet) unless bullet.nil?
+      bullets = @player.fire
+      @bullets.push(bullets).flatten! unless bullets.nil?
     end
   end
 end

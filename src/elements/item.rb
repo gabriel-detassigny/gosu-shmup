@@ -9,7 +9,7 @@ class Item < Element
     @z = ZOrder::ITEM
     @size = 16
 
-    @type = %w(life).sample
+    @type = %w(life missile).sample
     @image = Gosu::Image.new "assets/#{@type}-item.png"
   end
 
