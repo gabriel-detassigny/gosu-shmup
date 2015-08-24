@@ -13,7 +13,7 @@ class GameWindow < Gosu::Window
     super WIDTH, HEIGHT, options['fullscreen']
     self.caption = 'Shmup Game'
     @background = Gosu::Image.new 'assets/background.png', tileable: true
-    @player = Player.new
+    @player = Player.new options['godmode']
     @player.warp(WIDTH / 2, HEIGHT - 100)
     @bullets = []
     @fleet = EnemyFleet.new

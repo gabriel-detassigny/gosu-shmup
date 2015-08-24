@@ -8,8 +8,9 @@ class Player < Moveable
 
   MAX_LIVES = 5
 
-  def initialize
-    super
+  def initialize godmode
+    super()
+    @godmode = godmode
     @image = Gosu::Image.new 'assets/spaceship.png'
     @speed = 4.5
     @last_bullet = Gosu::milliseconds / 500
@@ -36,7 +37,7 @@ class Player < Moveable
   end
 
   def remove_life
-    if @animation == 0
+    if @animation == 0 && !@godmode
       @lives -= 1
       @animation = 100
     end

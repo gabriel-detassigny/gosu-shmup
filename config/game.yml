@@ -1,2 +1,3 @@
 config:
   fullscreen: false
+  godmode: false
