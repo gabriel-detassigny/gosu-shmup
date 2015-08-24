@@ -7,6 +7,7 @@ class Player < Moveable
   attr_reader :lives
 
   MAX_LIVES = 5
+  MAX_CANONS = 3
 
   def initialize godmode
     super()
@@ -40,6 +41,7 @@ class Player < Moveable
     if @animation == 0 && !@godmode
       @lives -= 1
       @animation = 100
+      @canons = 1
     end
   end
 
@@ -58,7 +60,7 @@ class Player < Moveable
     if item.type == 'life'
       @lives += 1 if @lives < MAX_LIVES
     elsif item.type == 'missile'
-      @canons += 1
+      @canons += 1 if @canons < MAX_CANONS
     end
   end
 
