@@ -4,6 +4,10 @@ require './src/elements/enemyfleet'
 require './src/elements/item'
 require './src/direction'
 require './src/zorder'
+require './src/screens/screen'
+require './src/screens/level'
+require './src/screens/gameover'
+require './src/screens/endlevel'
 
 class GameWindow < Gosu::Window
   WIDTH = 800
@@ -12,91 +16,30 @@ class GameWindow < Gosu::Window
   def initialize options = {}
     super WIDTH, HEIGHT, options['fullscreen']
     self.caption = 'Shmup Game'
-    @background = Gosu::Image.new 'assets/background.png', tileable: true
-    @player = Player.new options['godmode']
-    @player.warp(WIDTH / 2, HEIGHT - 100)
-    @bullets = []
-    @fleet = EnemyFleet.new
-    @items = []
+
+    player = Player.new options['godmode']
+    @screen = Level.new player, 0
   end
 
   def update
     _handle_inputs
-    if @player.lives > 0
-      @player.update
-      @fleet.update
-      @bullets.concat @fleet.get_bullets
-      _check_collisions
-      @bullets.reject! do |bullet|
-        bullet.travel
-        bullet.over?
-      end
-      @items.each(&:travel)
-      @items.reject!(&:over?)
+    if @screen.status == Screen::STATUS_OK
+      @screen.update
+    elsif @screen.status == Screen::STATUS_NEXT
+      @screen = @screen.get_next_screen
+    elsif @screen.status == Screen::STATUS_OVER
+      @screen = @screen.get_game_over
     end
   end
 
   def draw
-    @background.draw 0, 0, ZOrder::BACKGROUND
-    if @player.lives > 0
-      @player.draw
-      @fleet.draw
-      @bullets.each(&:draw)
-      @items.each(&:draw)
-    else
-      font = Gosu::Font.new 40
-      title_font = Gosu::Font.new 80
-      title_font.draw("GAME OVER", WIDTH / 4, HEIGHT / 4, ZOrder::INFO)
-      font.draw("Score : #{@player.score}", 320, HEIGHT / 2, ZOrder::INFO)
-    end
+    @screen.draw
   end
 
   private
-  def _check_collisions
-    @bullets.reject! do |bullet|
-      if bullet.fired_by_player? && @fleet.collision?(bullet)
-        @player.score += 5
-        if rand(0..10) == 0
-          item = Item.new bullet.position[0]
-          @items.push item
-        end
-        true
-      elsif !bullet.fired_by_player? && @player.collision?(bullet)
-        @player.remove_life
-        true
-      end
-    end
-    if @fleet.collision?(@player)
-      @player.remove_life
-    end
-    @items.reject! do |item|
-      if item.collision? @player
-        @player.get_item item
-        true
-      end
-    end
-  end
-
   def _handle_inputs
     if Gosu::button_down? Gosu::KbEscape
       close
-    end
-
-    if Gosu::button_down? Gosu::KbLeft
-      @player.move Direction::LEFT
-    elsif Gosu::button_down? Gosu::KbRight
-      @player.move Direction::RIGHT
-    end
-
-    if Gosu::button_down? Gosu::KbDown
-      @player.move Direction::DOWN
-    elsif Gosu::button_down? Gosu::KbUp
-      @player.move Direction::UP
-    end
-
-    if Gosu::button_down? Gosu::KbSpace
-      bullets = @player.fire
-      @bullets.push(bullets).flatten! unless bullets.nil?
     end
   end
 end

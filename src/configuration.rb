@@ -12,12 +12,16 @@ class Configuration
     end
   end
 
-  def get_all
+  def get_all_config
     @yaml['config']
   end
 
-  def get key
+  def get_config key
     @yaml['config'][key]
+  end
+
+  def get_level number
+    @yaml['levels'][number - 1]
   end
 
 end

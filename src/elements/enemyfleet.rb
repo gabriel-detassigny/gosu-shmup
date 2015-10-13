@@ -5,6 +5,7 @@ class EnemyFleet
     @enemies = []
     @time = Gosu::milliseconds / 500
     @bullets = []
+    @size = 0
   end
 
   def draw
@@ -26,8 +27,13 @@ class EnemyFleet
     clear != nil
   end
 
+  def nbr_of_dead
+    @size - @enemies.count
+  end
+
   private
   def _add_enemy
+    @size += 1
     enemy = Enemy.new
     width = rand(0..(GameWindow::WIDTH - enemy.size))
     enemy.warp(width, 0.0)
