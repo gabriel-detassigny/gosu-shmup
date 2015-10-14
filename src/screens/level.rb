@@ -1,3 +1,7 @@
+require './src/screens/gameover'
+require './src/screens/endlevel'
+require './src/direction'
+
 class Level < Screen
   def initialize player, number
     super(player)

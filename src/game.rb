@@ -1,13 +1,8 @@
 require 'gosu'
 require './src/elements/player'
 require './src/elements/enemyfleet'
-require './src/elements/item'
-require './src/direction'
-require './src/zorder'
 require './src/screens/screen'
 require './src/screens/level'
-require './src/screens/gameover'
-require './src/screens/endlevel'
 
 class GameWindow < Gosu::Window
   WIDTH = 800

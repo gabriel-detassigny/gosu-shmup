@@ -1,6 +1,7 @@
 require './src/elements/moveable'
 require './src/elements/bullet'
 require './src/direction'
+require './src/elements/item'
 
 class Player < Moveable
   attr_accessor :score
