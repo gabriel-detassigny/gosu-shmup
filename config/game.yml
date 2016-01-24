@@ -2,5 +2,7 @@ config:
   fullscreen: false
   godmode: false
 levels:
-  - enemies: 20
+  - enemies: 10
+    background: background.png
   - enemies: 30
+    background: background2.jpg

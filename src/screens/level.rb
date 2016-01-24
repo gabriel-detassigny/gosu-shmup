@@ -8,7 +8,7 @@ class Level < Screen
     @player.warp(GameWindow::WIDTH / 2, GameWindow::HEIGHT - 100)
     @number = number
     @config = Configuration.instance.get_level @number
-    @background = Gosu::Image.new 'assets/background.png', tileable: true
+    @background = Gosu::Image.new "assets/#{@config['background']}", tileable: true
     @fleet = EnemyFleet.new
     @bullets = []
     @items = []
