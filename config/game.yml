@@ -1,8 +1,15 @@
 config:
-  fullscreen: true
+  fullscreen: false
   godmode: false
 levels:
-  - enemies: 10
+  - enemies:
+      Basic: 10
     background: background.png
-  - enemies: 30
+  - enemies:
+      Basic: 30
     background: background2.jpg
+enemies:
+  Basic:
+    speed: 3
+    image: enemy.gif
+    size: 32

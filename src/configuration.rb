@@ -28,4 +28,8 @@ class Configuration
     number == @yaml['levels'].count
   end
 
+  def get_enemy enemy
+    @yaml['enemies'][enemy]
+  end
+
 end

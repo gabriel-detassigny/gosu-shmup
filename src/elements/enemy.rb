@@ -1,11 +1,12 @@
 require './src/elements/moveable'
 
 class Enemy < Moveable
-  def initialize
-    super
-    @image = Gosu::Image.new 'assets/enemy.gif'
-    @size = 32
-    @speed = 3
+  def initialize config_key
+    super()
+    config = Configuration.instance.get_enemy config_key
+    @image = Gosu::Image.new "assets/#{config['image']}"
+    @size = config['size']
+    @speed = config['speed']
     random_destination
     @z = ZOrder::SHIP
   end

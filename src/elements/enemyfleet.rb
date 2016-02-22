@@ -1,11 +1,11 @@
 require './src/elements/enemy'
 
 class EnemyFleet
-  def initialize size
+  def initialize config
     @enemies = []
     @time = Gosu::milliseconds / 500
     @bullets = []
-    @size = size
+    @config = config
   end
 
   def draw
@@ -22,19 +22,24 @@ class EnemyFleet
     @bullets.pop(@bullets.count)
   end
 
+  def size
+    @config.values.reduce(&:+)
+  end
+
   def collision? moveable
     clear = @enemies.reject! {|enemy| moveable.collision? enemy }
     clear != nil
   end
 
   def down?
-    return (@size <= 0 && @enemies.empty?)
+    return (size <= 0 && @enemies.empty?)
   end
 
   private
   def _add_enemy
-    @size -= 1
-    enemy = Enemy.new
+    random_key = @config.keys.sample
+    @config[random_key] -= 1
+    enemy = Enemy.new random_key
     width = rand(0..(GameWindow::WIDTH - enemy.size))
     enemy.warp(width, 0.0)
     @enemies.push enemy
@@ -42,7 +47,7 @@ class EnemyFleet
 
   def _random_ai
     if @time != Gosu::milliseconds / 500
-      if rand(1..5) == 1 && @size > 0
+      if rand(1..5) == 1 && size > 0
         _add_enemy
       end
       @time = Gosu::milliseconds / 500
