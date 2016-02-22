@@ -37,7 +37,7 @@ class EnemyFleet
 
   private
   def _add_enemy
-    random_key = @config.keys.sample
+    random_key = @config.reject {|enemy, size| size == 0 }.keys.sample
     @config[random_key] -= 1
     enemy = Enemy.new random_key
     width = rand(0..(GameWindow::WIDTH - enemy.size))

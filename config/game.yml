@@ -13,3 +13,7 @@ enemies:
     speed: 3
     image: enemy.gif
     size: 32
+  Advanced:
+    speed: 5
+    image: enemy2.png
+    size: 128
