@@ -6,6 +6,7 @@ class EndLevel < Screen
     super(player)
     @number = number
     @time = Gosu::milliseconds / 1000
+    @endgame = Configuration.instance.last_level? @number
   end
 
   def update
@@ -15,12 +16,18 @@ class EndLevel < Screen
   def draw
     font = Gosu::Font.new 40
     title_font = Gosu::Font.new 80
-    title_font.draw("Level #{@number} finished", GameWindow::WIDTH / 4, GameWindow::HEIGHT / 4, ZOrder::INFO)
+    if @endgame
+      title_font.draw("Game finished", GameWindow::WIDTH / 4, GameWindow::HEIGHT / 4, ZOrder::INFO)
+    else
+      title_font.draw("Level #{@number} finished", GameWindow::WIDTH / 4, GameWindow::HEIGHT / 4, ZOrder::INFO)
+    end
     font.draw("Score : #{@player.score}", 320, GameWindow::HEIGHT / 2, ZOrder::INFO)
   end
 
   def status
-    if @time + 5 < Gosu::milliseconds / 1000
+    if @endgame
+      STATUS_OK
+    elsif @time + 5 < Gosu::milliseconds / 1000
       STATUS_NEXT
     else
       STATUS_OK

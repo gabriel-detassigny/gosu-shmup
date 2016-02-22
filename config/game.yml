@@ -1,5 +1,5 @@
 config:
-  fullscreen: false
+  fullscreen: true
   godmode: false
 levels:
   - enemies: 10

@@ -24,4 +24,8 @@ class Configuration
     @yaml['levels'][number - 1]
   end
 
+  def last_level? number
+    number == @yaml['levels'].count
+  end
+
 end
