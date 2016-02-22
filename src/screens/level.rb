@@ -9,7 +9,7 @@ class Level < Screen
     @number = number
     @config = Configuration.instance.get_level @number
     @background = Gosu::Image.new "assets/#{@config['background']}", tileable: true
-    @fleet = EnemyFleet.new
+    @fleet = EnemyFleet.new @config['enemies']
     @bullets = []
     @items = []
   end
@@ -39,7 +39,7 @@ class Level < Screen
   def status
     if @player.lives <= 0
       STATUS_OVER
-    elsif @config['enemies'] <= @fleet.nbr_of_dead
+    elsif @fleet.down?
       STATUS_NEXT
     else
       STATUS_OK

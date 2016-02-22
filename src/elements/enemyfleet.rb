@@ -1,11 +1,11 @@
 require './src/elements/enemy'
 
 class EnemyFleet
-  def initialize
+  def initialize size
     @enemies = []
     @time = Gosu::milliseconds / 500
     @bullets = []
-    @size = 0
+    @size = size
   end
 
   def draw
@@ -27,13 +27,13 @@ class EnemyFleet
     clear != nil
   end
 
-  def nbr_of_dead
-    @size - @enemies.count
+  def down?
+    return (@size <= 0 && @enemies.empty?)
   end
 
   private
   def _add_enemy
-    @size += 1
+    @size -= 1
     enemy = Enemy.new
     width = rand(0..(GameWindow::WIDTH - enemy.size))
     enemy.warp(width, 0.0)
@@ -42,7 +42,7 @@ class EnemyFleet
 
   def _random_ai
     if @time != Gosu::milliseconds / 500
-      if rand(1..5) == 1
+      if rand(1..5) == 1 && @size > 0
         _add_enemy
       end
       @time = Gosu::milliseconds / 500
