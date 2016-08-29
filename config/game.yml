@@ -14,7 +14,9 @@ enemies:
     speed: 3
     image: enemy.png
     size: 32
+    hostility: 2
   Advanced:
     speed: 4
     image: enemy2.png
     size: 28
+    hostility: 3

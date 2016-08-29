@@ -52,7 +52,7 @@ class EnemyFleet
       end
       @time = Gosu::milliseconds / 500
       @enemies.each do |enemy|
-        if rand(1..4) == 1
+        if rand((enemy.hostility)..5) == 5
           @bullets.push enemy.fire
         end
         if rand(0..2) == 1

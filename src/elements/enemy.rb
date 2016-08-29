@@ -1,12 +1,15 @@
 require './src/elements/moveable'
 
 class Enemy < Moveable
+  attr_reader :hostility
+
   def initialize config_key
     super()
     config = Configuration.instance.get_enemy config_key
     @image = Gosu::Image.new "assets/#{config['image']}"
     @size = config['size']
     @speed = config['speed']
+    @hostility = config['hostility']
     random_destination
     @z = ZOrder::SHIP
   end
