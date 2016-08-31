@@ -3,20 +3,20 @@ config:
   godmode: false
 levels:
   - enemies:
-      Basic: 25
+      Basic: 40
     background: background.png
   - enemies:
       Basic: 40
-      Advanced: 20
+      Advanced: 30
     background: background2.png
 enemies:
   Basic:
     speed: 3
     image: enemy.png
     size: 32
-    hostility: 2
+    hostility: 4
   Advanced:
     speed: 4
     image: enemy2.png
     size: 28
-    hostility: 3
+    hostility: 6
