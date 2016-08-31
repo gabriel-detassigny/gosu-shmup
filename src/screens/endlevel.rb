@@ -1,11 +1,12 @@
 class EndLevel < Screen
 
   SECONDS_DISPLAY = 5
+  TIME_DIVIDER = 1000
 
   def initialize player, number
     super(player)
     @number = number
-    @time = Gosu::milliseconds / 1000
+    @time = Gosu::milliseconds / TIME_DIVIDER
     @endgame = Configuration.instance.last_level? @number
   end
 
@@ -27,7 +28,7 @@ class EndLevel < Screen
   def status
     if @endgame
       STATUS_OK
-    elsif @time + 5 < Gosu::milliseconds / 1000
+    elsif @time + 5 < Gosu::milliseconds / TIME_DIVIDER
       STATUS_NEXT
     else
       STATUS_OK
