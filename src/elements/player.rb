@@ -9,13 +9,14 @@ class Player < Moveable
 
   MAX_LIVES = 5
   MAX_CANONS = 3
+  TIME_DIVIDER = 350
 
   def initialize godmode
     super()
     @godmode = godmode
     @image = Gosu::Image.new 'assets/spaceship.png'
     @speed = 4.5
-    @last_bullet = Gosu::milliseconds / 500
+    @last_bullet = Gosu::milliseconds / TIME_DIVIDER
     @size = 48
     @lives = 3
     @heart = Gosu::Image.new 'assets/heart.png'
@@ -47,12 +48,12 @@ class Player < Moveable
   end
 
   def fire
-    return nil if @last_bullet == Gosu::milliseconds / 350
+    return nil if @last_bullet == Gosu::milliseconds / TIME_DIVIDER
     bullets = _extra_canons
     bullet = Bullet.new(true)
     bullet.warp @x + 20, @y - 10
     bullet.orientation = Direction::UP
-    @last_bullet = Gosu::milliseconds / 350
+    @last_bullet = Gosu::milliseconds / TIME_DIVIDER
     bullets.push bullet
     return bullets
   end
