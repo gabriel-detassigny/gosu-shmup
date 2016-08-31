@@ -9,12 +9,21 @@ levels:
       Basic: 40
       Advanced: 30
     background: background2.png
+  - enemies:
+      Advanced: 40
+      BasicAngry: 15
+    background: background3.png
 enemies:
   Basic:
     speed: 3
     image: enemy.png
     size: 32
     hostility: 4
+  BasicAngry:
+    speed: 4
+    image: enemy.png
+    size: 32
+    hostility: 8
   Advanced:
     speed: 4
     image: enemy2.png
