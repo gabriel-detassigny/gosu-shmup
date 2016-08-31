@@ -1,12 +1,14 @@
 class Element
   attr_reader :size
 
+  TIME_DIVIDER = 40
+
   def initialize
     @x = 0.0
     @y = 0.0
     @size = 0
     @image = nil
-    @time = Gosu::milliseconds / 40
+    @time = Gosu::milliseconds / TIME_DIVIDER
   end
 
   def warp(x, y)
@@ -18,9 +20,9 @@ class Element
   end
 
   def travel
-    if @time < Gosu::milliseconds / 40
+    if @time < Gosu::milliseconds / TIME_DIVIDER
         @y += 3
-      @time = Gosu::milliseconds / 40
+      @time = Gosu::milliseconds / TIME_DIVIDER
     end
   end
 

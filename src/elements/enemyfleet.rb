@@ -1,9 +1,11 @@
 require './src/elements/enemy'
 
 class EnemyFleet
+  TIME_DIVIDER = 500
+
   def initialize config
     @enemies = []
-    @time = Gosu::milliseconds / 500
+    @time = Gosu::milliseconds / TIME_DIVIDER
     @bullets = []
     @config = config
   end
@@ -46,11 +48,11 @@ class EnemyFleet
   end
 
   def _random_ai
-    if @time != Gosu::milliseconds / 500
+    if @time != Gosu::milliseconds / TIME_DIVIDER
       if rand(1..5) == 1 && size > 0
         _add_enemy
       end
-      @time = Gosu::milliseconds / 500
+      @time = Gosu::milliseconds / TIME_DIVIDER
       @enemies.each do |enemy|
         if rand((enemy.hostility)..5) == 5
           @bullets.push enemy.fire
