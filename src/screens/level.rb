@@ -74,14 +74,20 @@ class Level < Screen
         true
       end
     end
+
     if @fleet.collision?(@player)
       @player.remove_life
     end
+
     @items.reject! do |item|
       if item.collision? @player
         @player.get_item item
         true
       end
+    end
+
+    @asteroids.each do |asteroid|
+      @player.remove_life if asteroid.collision? @player
     end
   end
 
@@ -106,7 +112,7 @@ class Level < Screen
 
   def _update_asteroids
     if @time != Gosu::milliseconds / TIME_DIVIDER
-      if rand(1..30) == 30
+      if rand(1..40) == 40
         _add_asteroid
       end
       @time = Gosu::milliseconds / TIME_DIVIDER
