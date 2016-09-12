@@ -3,7 +3,7 @@ class Bullet < Moveable
     super()
     @image = Gosu::Image.new 'assets/bullet.bmp'
     @size = 9
-    @speed = 8
+    @speed = 11
     @player_fired = player_fired
     @z = ZOrder::BULLET
   end
