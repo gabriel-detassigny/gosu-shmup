@@ -13,7 +13,6 @@ class Level < Screen
     @number = number
     @config = Configuration.instance.get_level @number
     @background = Gosu::Image.new "assets/#{@config['background']}", tileable: true
-    @fleet = EnemyFleet.new @config['enemies']
     @time = Gosu::milliseconds / TIME_DIVIDER
     @explosion_animation = Gosu::Image::load_tiles("assets/explosion.png", 40, 40)
     init_elements
@@ -24,20 +23,17 @@ class Level < Screen
     @items = []
     @asteroids = []
     @explosions = []
+    @fleet = EnemyFleet.new @config['enemies']
   end
 
   def update
     _handle_inputs
+
     @player.update
     @fleet.update
-    _update_asteroids
 
-    @bullets.concat @fleet.get_bullets
-    _check_collisions
-    @bullets.reject! do |bullet|
-      bullet.travel
-      bullet.over?
-    end
+    _update_asteroids
+    _update_bullets
 
     @items.each(&:travel)
     @items.reject!(&:over?)
@@ -131,6 +127,15 @@ class Level < Screen
     end
     @asteroids.each(&:travel)
     @asteroids.reject!(&:over?)
+  end
+
+  def _update_bullets
+    @bullets.concat @fleet.get_bullets
+    _check_collisions
+    @bullets.reject! do |bullet|
+      bullet.travel
+      bullet.over?
+    end
   end
 
   def _add_asteroid
