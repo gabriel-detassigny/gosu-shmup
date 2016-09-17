@@ -2,6 +2,7 @@ require './src/screens/gameover'
 require './src/screens/endlevel'
 require './src/direction'
 require './src/elements/asteroid'
+require './src/elements/explosion'
 
 class Level < Screen
   TIME_DIVIDER = 80
@@ -13,10 +14,16 @@ class Level < Screen
     @config = Configuration.instance.get_level @number
     @background = Gosu::Image.new "assets/#{@config['background']}", tileable: true
     @fleet = EnemyFleet.new @config['enemies']
+    @time = Gosu::milliseconds / TIME_DIVIDER
+    @explosion_animation = Gosu::Image::load_tiles("assets/explosion.png", 40, 40)
+    init_elements
+  end
+
+  def init_elements
     @bullets = []
     @items = []
     @asteroids = []
-    @time = Gosu::milliseconds / TIME_DIVIDER
+    @explosions = []
   end
 
   def update
@@ -34,6 +41,9 @@ class Level < Screen
 
     @items.each(&:travel)
     @items.reject!(&:over?)
+
+    @explosions.each(&:update)
+    @explosions.reject!(&:over?)
   end
 
   def draw
@@ -43,6 +53,7 @@ class Level < Screen
     @bullets.each(&:draw)
     @items.each(&:draw)
     @asteroids.each(&:draw)
+    @explosions.each(&:draw)
   end
 
   def status
@@ -68,6 +79,7 @@ class Level < Screen
           item = Item.new bullet.position[0]
           @items.push item
         end
+        @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
         true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
         @player.remove_life
