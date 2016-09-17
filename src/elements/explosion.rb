@@ -1,16 +1,17 @@
 require './src/elements/element'
 
 class Explosion < Element
-  TIME_DIVIDER = 800
+  EXPLOSION_TIME = 100
 
   def initialize animation, position
+    super()
     @x = position[0]
     @y = position[1]
     @z = ZOrder::BULLET
     @size = 40
     @animation = animation
     @state = 0
-    @time = Gosu::milliseconds / TIME_DIVIDER
+    @animation_time = Gosu::milliseconds / EXPLOSION_TIME
   end
 
   def draw
@@ -21,8 +22,10 @@ class Explosion < Element
   end
 
   def update
-    if @time != Gosu::milliseconds / TIME_DIVIDER
+    travel
+    if @animation_time != Gosu::milliseconds / EXPLOSION_TIME
       @state += 1
+      @animation_time = Gosu::milliseconds / EXPLOSION_TIME
     end
   end
 
