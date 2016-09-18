@@ -17,7 +17,7 @@ levels:
 enemies:
   Basic:
     speed: 3
-    image: enemy.png
+    image: enemy1.png
     size: 32
     hostility: 4
   BasicAngry:

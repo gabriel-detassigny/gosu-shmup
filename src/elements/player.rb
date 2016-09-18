@@ -14,7 +14,7 @@ class Player < Moveable
   def initialize godmode
     super()
     @godmode = godmode
-    @image = Gosu::Image.new 'assets/spaceship.png'
+    @image = Gosu::Image.new 'assets/images/spaceships/player.png'
     @speed = 4.5
     @last_bullet = Gosu::milliseconds / TIME_DIVIDER
     @size = 48

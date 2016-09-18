@@ -6,7 +6,7 @@ class Enemy < Moveable
   def initialize config_key
     super()
     config = Configuration.instance.get_enemy config_key
-    @image = Gosu::Image.new "assets/#{config['image']}"
+    @image = Gosu::Image.new "assets/images/spaceships/#{config['image']}"
     @size = config['size']
     @speed = config['speed']
     @hostility = config['hostility']
