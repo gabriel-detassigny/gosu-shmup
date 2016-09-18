@@ -4,16 +4,16 @@ config:
 levels:
   - enemies:
       Basic: 40
-    background: background.png
+    background: level1.png
   - enemies:
       Basic: 40
       Advanced: 30
-    background: background2.png
+    background: level2.png
   - enemies:
       Advanced: 30
       BasicAngry: 35
       Basic: 20
-    background: background3.png
+    background: level3.png
 enemies:
   Basic:
     speed: 3
