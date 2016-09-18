@@ -10,7 +10,7 @@ class Item < Element
     @size = 16
 
     @type = %w(life missile).sample
-    @image = Gosu::Image.new "assets/#{@type}-item.png"
+    @image = Gosu::Image.new "assets/images/items/#{@type}.png"
   end
 
   def over?
