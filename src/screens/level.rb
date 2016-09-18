@@ -53,7 +53,7 @@ class Level < Screen
   end
 
   def status
-    if @player.lives <= 0
+    if @player.over?
       STATUS_OVER
     elsif @fleet.down?
       STATUS_NEXT

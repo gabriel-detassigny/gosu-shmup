@@ -2,6 +2,7 @@ require './src/elements/moveable'
 require './src/elements/bullet'
 require './src/direction'
 require './src/elements/item'
+require './src/elements/explosion'
 
 class Player < Moveable
   attr_accessor :score
@@ -25,11 +26,16 @@ class Player < Moveable
     @animation = 0
     @z = ZOrder::SHIP
     @canons = 1
+    @explosion = nil
   end
 
   def draw
-    if @animation % 2 == 0
-      super
+    if @explosion.nil?
+      if @animation % 2 == 0
+        super
+      end
+    else
+      @explosion.draw
     end
     _draw_lives
     _draw_score
@@ -37,14 +43,23 @@ class Player < Moveable
 
   def update
     @animation -= 1 if @animation > 0
+    @explosion.update unless @explosion.nil?
   end
 
   def remove_life
     if @animation == 0 && !@godmode
       @lives -= 1
-      @animation = 100
+      if @lives <= 0
+        create_explosion
+      else
+        @animation = 100
+      end
       @canons = 1
     end
+  end
+
+  def over?
+    @lives <= 0 && !@explosion.nil? && @explosion.over?
   end
 
   def fire
@@ -96,5 +111,10 @@ class Player < Moveable
   def _draw_score
     score_size = @score.to_s.size + 1
     @font.draw("#{@score}", GameWindow::WIDTH - (10 * score_size), GameWindow::HEIGHT - 25, ZOrder::INFO)
+  end
+
+  def create_explosion
+    explosion_animation = Gosu::Image::load_tiles("assets/images/elements/explosion.png", 40, 40)
+    @explosion = Explosion.new explosion_animation, [@x, @y]
   end
 end
