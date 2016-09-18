@@ -14,7 +14,7 @@ class Level < Screen
     @config = Configuration.instance.get_level @number
     @background = Gosu::Image.new "assets/images/backgrounds/#{@config['background']}", tileable: true
     @time = Gosu::milliseconds / TIME_DIVIDER
-    @explosion_animation = Gosu::Image::load_tiles("assets/explosion.png", 40, 40)
+    @explosion_animation = Gosu::Image::load_tiles("assets/images/elements/explosion.png", 40, 40)
     init_elements
   end
 

@@ -19,7 +19,7 @@ class Player < Moveable
     @last_bullet = Gosu::milliseconds / TIME_DIVIDER
     @size = 48
     @lives = 3
-    @heart = Gosu::Image.new 'assets/heart.png'
+    @heart = Gosu::Image.new 'assets/images/elements/heart.png'
     @score = 0
     @font = Gosu::Font.new 20
     @animation = 0

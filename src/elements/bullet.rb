@@ -1,7 +1,7 @@
 class Bullet < Moveable
   def initialize(player_fired)
     super()
-    @image = Gosu::Image.new 'assets/bullet.bmp'
+    @image = Gosu::Image.new 'assets/images/elements/bullet.bmp'
     @size = 9
     @speed = 11
     @player_fired = player_fired

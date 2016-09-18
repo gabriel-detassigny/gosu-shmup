@@ -7,7 +7,7 @@ class Asteroid < Moveable
     @z = ZOrder::ASTEROID
     @size = 64
     @speed = 5
-    @image = Gosu::Image.new "assets/asteroid.png"
+    @image = Gosu::Image.new "assets/images/elements/asteroid.png"
   end
 
   def over?
