@@ -3,11 +3,12 @@ require './src/elements/enemy'
 class EnemyFleet
   TIME_DIVIDER = 80
 
-  def initialize config
+  def initialize config, frequency
     @enemies = []
     @time = Gosu::milliseconds / TIME_DIVIDER
     @bullets = []
     @config = config
+    @frequency = frequency
   end
 
   def draw
@@ -49,7 +50,7 @@ class EnemyFleet
 
   def _random_ai
     if @time != Gosu::milliseconds / TIME_DIVIDER
-      if rand(1..25) == 25 && size > 0
+      if rand((@frequency)..25) == 25 && size > 0
         _add_enemy
       end
       @time = Gosu::milliseconds / TIME_DIVIDER

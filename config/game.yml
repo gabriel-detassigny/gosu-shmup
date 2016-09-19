@@ -7,17 +7,20 @@ levels:
       Basic: 40
     background: level1.png
     asteroid_frequency: 5
+    enemy_frequency: 1
   - enemies:
       Basic: 40
       Advanced: 30
     background: level2.png
     asteroid_frequency: 10
+    enemy_frequency: 5
   - enemies:
       Advanced: 30
       BasicAngry: 35
       Basic: 20
     background: level3.png
     asteroid_frequency: 25
+    enemy_frequency: 7
 enemies:
   Basic:
     speed: 3

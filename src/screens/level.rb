@@ -23,7 +23,7 @@ class Level < Screen
     @items = []
     @asteroids = []
     @explosions = []
-    @fleet = EnemyFleet.new @config['enemies']
+    @fleet = EnemyFleet.new @config['enemies'], @config['enemy_frequency']
   end
 
   def update
