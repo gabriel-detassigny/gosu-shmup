@@ -1,19 +1,23 @@
 config:
   fullscreen: false
   godmode: false
+  level_start: 1
 levels:
   - enemies:
       Basic: 40
     background: level1.png
+    asteroid_frequency: 5
   - enemies:
       Basic: 40
       Advanced: 30
     background: level2.png
+    asteroid_frequency: 10
   - enemies:
       Advanced: 30
       BasicAngry: 35
       Basic: 20
     background: level3.png
+    asteroid_frequency: 25
 enemies:
   Basic:
     speed: 3

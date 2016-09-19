@@ -13,7 +13,7 @@ class GameWindow < Gosu::Window
     self.caption = 'Shmup Game'
 
     player = Player.new options['godmode']
-    @screen = Level.new player, 1
+    @screen = Level.new player, options['level_start']
   end
 
   def update

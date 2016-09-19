@@ -120,7 +120,7 @@ class Level < Screen
 
   def _update_asteroids
     if @time != Gosu::milliseconds / TIME_DIVIDER
-      if rand(1..40) == 40
+      if rand(@config['asteroid_frequency']..50) == 50
         _add_asteroid
       end
       @time = Gosu::milliseconds / TIME_DIVIDER
