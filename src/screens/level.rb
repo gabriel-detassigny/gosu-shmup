@@ -79,7 +79,7 @@ class Level < Screen
   def _check_collisions
     @bullets.reject! do |bullet|
       if bullet.fired_by_player? && @fleet.collision?(bullet)
-        @player.score += 5
+        @player.score += 250
         _add_item_randomly bullet.position[0]
         @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
         true
