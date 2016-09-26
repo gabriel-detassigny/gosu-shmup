@@ -67,14 +67,20 @@ class Level < Screen
   end
 
   private
+
+  def _add_item_randomly position
+    if rand(0..10) == 0 && @config['item_limit'] > 0
+      item = Item.new position
+      @items.push item
+      @config['item_limit'] -= 1
+    end
+  end
+
   def _check_collisions
     @bullets.reject! do |bullet|
       if bullet.fired_by_player? && @fleet.collision?(bullet)
         @player.score += 5
-        if rand(0..10) == 0
-          item = Item.new bullet.position[0]
-          @items.push item
-        end
+        _add_item_randomly bullet.position[0]
         @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
         true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
