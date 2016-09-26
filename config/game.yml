@@ -1,7 +1,7 @@
 config:
   fullscreen: false
   godmode: false
-  level_start: 1
+  level_start: 4
 levels:
   - enemies:
       Basic: 40
@@ -24,6 +24,13 @@ levels:
     asteroid_frequency: 25
     enemy_frequency: 7
     item_limit: 3
+  - enemies:
+      Warrior: 20
+      BasicAngry: 15
+    background: level4.png
+    asteroid_frequency: 20
+    enemy_frequency: 8
+    item_limit: 2
 enemies:
   Basic:
     speed: 3
@@ -40,3 +47,8 @@ enemies:
     image: enemy2.png
     size: 28
     hostility: 6
+  Warrior:
+    speed: 3
+    image: enemy4.png
+    size: 48
+    hostility: 10
