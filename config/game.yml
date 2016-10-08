@@ -1,5 +1,5 @@
 config:
-  fullscreen: false
+  fullscreen: true
   godmode: false
   level_start: 1
 levels:
@@ -25,10 +25,10 @@ levels:
     enemy_frequency: 7
     item_limit: 3
   - enemies:
-      Warrior: 12
-      AdvancedScout: 5
-      Scout: 20
-      Speeder: 10
+      Warrior: 22
+      AdvancedScout: 15
+      Scout: 30
+      Speeder: 40
     background: level4.png
     asteroid_frequency: 20
     enemy_frequency: 8
