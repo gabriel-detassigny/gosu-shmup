@@ -3,12 +3,15 @@ require './src/elements/enemy'
 class EnemyFleet
   TIME_DIVIDER = 80
 
+  attr_reader :last_collision_killed
+
   def initialize config, frequency
     @enemies = []
     @time = Gosu::milliseconds / TIME_DIVIDER
     @bullets = []
     @config = config
     @frequency = frequency
+    @last_collision_killed = false
   end
 
   def draw
@@ -30,8 +33,18 @@ class EnemyFleet
   end
 
   def collision? moveable
-    clear = @enemies.reject! {|enemy| moveable.collision? enemy }
-    clear != nil
+    collision = false
+    @last_collision_killed = false
+    @enemies.reject! do |enemy|
+      if moveable.collision? enemy
+        collision = true
+        enemy.decrease_life
+      end
+      @last_collision_killed = true if enemy.dead?
+      enemy.dead?
+    end
+
+    return collision
   end
 
   def down?

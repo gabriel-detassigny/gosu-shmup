@@ -39,18 +39,22 @@ enemies:
     image: enemy1.png
     size: 32
     hostility: 4
+    resistance: 1
   AdvancedScout:
     speed: 4
     image: enemy3.png
     size: 32
     hostility: 8
+    resistance: 2
   Speeder:
     speed: 4
     image: enemy2.png
     size: 28
     hostility: 6
+    resistance: 1
   Warrior:
     speed: 3
     image: enemy4.png
     size: 48
     hostility: 10
+    resistance: 3

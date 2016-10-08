@@ -79,9 +79,11 @@ class Level < Screen
   def _check_collisions
     @bullets.reject! do |bullet|
       if bullet.fired_by_player? && @fleet.collision?(bullet)
-        @player.score += 250
-        _add_item_randomly bullet.position[0]
-        @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
+        if @fleet.last_collision_killed
+          @player.score += 250
+          _add_item_randomly bullet.position[0]
+          @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
+        end
         true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
         @player.remove_life

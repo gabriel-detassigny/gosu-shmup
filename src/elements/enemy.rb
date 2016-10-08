@@ -10,12 +10,21 @@ class Enemy < Moveable
     @size = config['size']
     @speed = config['speed']
     @hostility = config['hostility']
+    @life = config['resistance']
     random_destination
     @z = ZOrder::SHIP
   end
 
   def over?
     @y >= GameWindow::HEIGHT
+  end
+
+  def decrease_life
+    @life -= 1
+  end
+
+  def dead?
+    @life <= 0
   end
 
   def fire
