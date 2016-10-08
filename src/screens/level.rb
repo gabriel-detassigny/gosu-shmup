@@ -85,6 +85,8 @@ class Level < Screen
           @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
         end
         true
+      elsif bullet.fired_by_player? && _asteroids_collision?(bullet)
+        true
       elsif !bullet.fired_by_player? && @player.collision?(bullet)
         @player.remove_life
         true
@@ -135,6 +137,23 @@ class Level < Screen
     end
     @asteroids.each(&:travel)
     @asteroids.reject!(&:over?)
+  end
+
+  def _asteroids_collision? bullet
+    collision = false
+    @asteroids.reject! do |asteroid|
+      if asteroid.collision? bullet
+        collision = true
+        asteroid.decrease_resistance!
+      end
+
+      if asteroid.destroyed?
+        @explosions.push Explosion.new(@explosion_animation, bullet.position[0])
+      end
+
+      asteroid.destroyed?
+    end
+    collision
   end
 
   def _update_bullets
