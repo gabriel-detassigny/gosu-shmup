@@ -4,20 +4,21 @@ config:
   level_start: 1
 levels:
   - enemies:
-      Scout: 40
+      Scout: 25
     background: level1.png
-    asteroid_frequency: 5
+    asteroid_frequency: 3
     enemy_frequency: 1
-    item_limit: 2
+    item_limit: 4
   - enemies:
-      Scout: 40
-      Speeder: 30
+      Scout: 20
+      Speeder: 15
+      Fighter: 5
     background: level2.png
     asteroid_frequency: 10
     enemy_frequency: 5
     item_limit: 2
   - enemies:
-      Speeder: 30
+      Speeder: 20
       AdvancedScout: 35
       Scout: 20
     background: level3.png
@@ -25,10 +26,10 @@ levels:
     enemy_frequency: 7
     item_limit: 3
   - enemies:
-      Warrior: 22
+      Warrior: 12
       AdvancedScout: 15
-      Scout: 30
-      Speeder: 40
+      Fighter: 10
+      Speeder: 20
     background: level4.png
     asteroid_frequency: 20
     enemy_frequency: 8
@@ -38,23 +39,29 @@ enemies:
     speed: 3
     image: enemy1.png
     size: 32
-    hostility: 4
+    hostility: 3
     resistance: 1
   AdvancedScout:
     speed: 4
     image: enemy3.png
     size: 32
-    hostility: 8
+    hostility: 7
     resistance: 2
   Speeder:
     speed: 4
     image: enemy2.png
     size: 28
-    hostility: 6
+    hostility: 5
     resistance: 1
   Warrior:
     speed: 3
     image: enemy4.png
     size: 48
-    hostility: 10
+    hostility: 9
     resistance: 3
+  Fighter:
+    speed: 3
+    image: enemy5.png
+    size: 48
+    hostility: 6
+    resistance: 2
