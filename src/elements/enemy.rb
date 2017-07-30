@@ -11,6 +11,7 @@ class Enemy < Moveable
     @speed = config['speed']
     @hostility = config['hostility']
     @life = config['resistance']
+    @fire_directions = config['fire_directions']
     random_destination
     @z = ZOrder::SHIP
   end
@@ -30,7 +31,7 @@ class Enemy < Moveable
   def fire
     bullet = Bullet.new(false)
     bullet.warp @x + 15, @y + 35
-    bullet.orientation = Direction::DOWN
+    bullet.orientation = _get_random_fire_direction
     bullet
   end
 
@@ -45,5 +46,17 @@ class Enemy < Moveable
 
   def random_destination
     @destination = rand(0..(GameWindow::WIDTH - @size))
+  end
+
+  private
+  def _get_random_fire_direction
+      direction = @fire_directions.sample
+      if direction == 'down'
+          Direction::DOWN
+      elsif direction == 'left_down'
+          Direction::LEFT_DOWN
+      elsif direction == 'right_down'
+          Direction::RIGHT_DOWN
+      end
   end
 end

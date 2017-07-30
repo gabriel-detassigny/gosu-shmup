@@ -5,6 +5,8 @@ require './src/elements/element'
 class Moveable < Element
   attr_accessor :orientation
 
+  DIAGONAL_COEFF = 0.707
+
   def initialize
     super
     @speed = 1
@@ -17,6 +19,12 @@ class Moveable < Element
         @y -= @speed
       elsif @orientation == Direction::DOWN
         @y += @speed
+      elsif @orientation == Direction::LEFT_DOWN
+        @y += (@speed * DIAGONAL_COEFF)
+        @x -= (@speed * DIAGONAL_COEFF)
+      elsif @orientation == Direction::RIGHT_DOWN
+        @y += (@speed * DIAGONAL_COEFF)
+        @x += (@speed * DIAGONAL_COEFF)
       end
       @time = Gosu::milliseconds / Element::TIME_DIVIDER
     end

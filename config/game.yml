@@ -41,27 +41,39 @@ enemies:
     size: 32
     hostility: 3
     resistance: 1
+    fire_directions:
+      - down
   AdvancedScout:
     speed: 4
     image: enemy3.png
     size: 32
     hostility: 7
     resistance: 2
+    fire_directions:
+      - down
   Speeder:
     speed: 4
     image: enemy2.png
     size: 28
     hostility: 5
     resistance: 1
+    fire_directions:
+      - down
   Warrior:
     speed: 3
     image: enemy4.png
     size: 48
     hostility: 9
     resistance: 3
+    fire_directions:
+      - down
   Fighter:
     speed: 3
     image: enemy5.png
     size: 48
     hostility: 6
     resistance: 2
+    fire_directions:
+      - down
+      - left_down
+      - right_down
